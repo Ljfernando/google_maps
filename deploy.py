@@ -29,4 +29,6 @@ git_clone_command = "git clone https://github.com/" + \
 stdin, stdout, stderr = ssh.exec_command(git_clone_command)
 # If repo already exists, pull recent version
 if (b"already exists" in stderr.read()):
+    print('Repo exists. Pulling recent changes')
     stdin, stdout, stderr = ssh.exec_command(git_pull_command)
+    print(stdout.read())
