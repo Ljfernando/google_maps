@@ -22,13 +22,13 @@ git_repo_owner = "ljfernando"
 git_repo_name = "google_maps"
 git_user_id = "ljfernando"
 
-git_pull_command = "git pull https://github.com/" + \
-    git_user_id + "/" + git_repo_name + ".git"
 git_clone_command = "git clone https://github.com/" + \
     git_user_id + "/" + git_repo_name + ".git"
 stdin, stdout, stderr = ssh.exec_command(git_clone_command)
 # If repo already exists, pull recent version
 if (b"already exists" in stderr.read()):
     print('Repo exists. Pulling recent changes')
-    stdin, stdout, stderr = ssh.exec_command(git_pull_command)
+    stdin, stdout, stderr = ssh.exec_command('cd %s' % git_repo_name)
+    stdin, stdout, stderr = ssh.exec_command('git pull')
     print(stdout.read())
+    print(stderr.read())
