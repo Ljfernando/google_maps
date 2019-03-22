@@ -28,7 +28,5 @@ stdin, stdout, stderr = ssh.exec_command(git_clone_command)
 # If repo already exists, pull recent version
 if (b"already exists" in stderr.read()):
     print('Repo exists. Pulling recent changes')
-    stdin, stdout, stderr = ssh.exec_command('cd %s' % git_repo_name)
-    stdin, stdout, stderr = ssh.exec_command('git pull')
-    print(stdout.read())
-    print(stderr.read())
+    stdin, stdout, stderr = ssh.exec_command('rm -rf ' + git_repo_name)
+    stdin, stdout, stderr = ssh.exec_command(git_clone_command)
